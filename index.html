@@ -1,186 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anujee💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anujee 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:'Poppins', sans-serif;
-  background:linear-gradient(135deg,#fbc2eb,#fcd6ce);
-  overflow:hidden;
-  text-align:center;
-}
+  :root{
+    --bg1:#fbc2eb;
+    --bg2:#fcd6ce;
+    --card:#ffffff;
+    --accent:#e63946;
+    --text:#111;
+    --muted:#666;
+  }
 
-/* Floating flowers */
-.flower{
-  position:absolute;
-  font-size:22px;
-  opacity:0.25;
-  animation: float 12s linear infinite;
-}
+  body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    overflow:hidden;
+    text-align:center;
+  }
 
-@keyframes float{
-  from{ transform:translateY(100vh) rotate(0deg);}
-  to{ transform:translateY(-120vh) rotate(360deg);}
-}
+  /* subtle floral pattern overlay */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.18;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M60 60c18 0 18-24 0-24s-18 24 0 24z'/%3E%3Cpath d='M60 60c0 18 24 18 24 0s-24-18-24 0z'/%3E%3Cpath d='M60 60c-18 0-18 24 0 24s18-24 0-24z'/%3E%3Cpath d='M60 60c0-18-24-18-24 0s24 18 24 0z'/%3E%3Cpath d='M180 150c18 0 18-24 0-24s-18 24 0 24z'/%3E%3Cpath d='M180 150c0 18 24 18 24 0s-24-18-24 0z'/%3E%3Cpath d='M180 150c-18 0-18 24 0 24s18-24 0-24z'/%3E%3Cpath d='M180 150c0-18-24-18-24 0s24 18 24 0z'/%3E%3C/g%3E%3Cg fill='%23ffffff' opacity='0.35'%3E%3Ccircle cx='60' cy='60' r='3'/%3E%3Ccircle cx='180' cy='150' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 260px 260px;
+    background-repeat: repeat;
+    filter: blur(0.2px);
+  }
 
-.card{
-  background:white;
-  padding:60px 50px;
-  border-radius:30px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.15);
-  width:90%;
-  max-width:520px;
-  display:none;
-  animation:fadeIn 1s ease forwards;
-}
+  /* Floating flower emojis (very subtle, optional vibe) */
+  .flower{
+    position:absolute;
+    font-size:20px;
+    opacity:0.14;
+    animation: float 14s linear infinite;
+    user-select:none;
+    pointer-events:none;
+    filter: blur(0.2px);
+  }
+  @keyframes float{
+    from{ transform:translateY(110vh) rotate(0deg); }
+    to{ transform:translateY(-130vh) rotate(360deg); }
+  }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
+  /* Start screen */
+  #startScreen{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    padding:24px;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  }
+  .startCard{
+    background:rgba(255,255,255,0.86);
+    backdrop-filter: blur(8px);
+    border-radius:26px;
+    padding:28px 22px;
+    box-shadow:0 18px 50px rgba(0,0,0,0.15);
+    width:min(520px, 92vw);
+  }
+  .startTitle{
+    font-family:'Playfair Display', serif;
+    font-size:28px;
+    margin:0 0 8px;
+    color:var(--text);
+  }
+  .startHint{
+    margin:0 0 16px;
+    color:var(--muted);
+    font-size:14px;
+  }
+  .startBtn{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    border-radius:999px;
+    padding:12px 18px;
+    font-weight:500;
+    box-shadow:0 12px 26px rgba(0,0,0,0.14);
+  }
 
-h1{
-  font-family:'Playfair Display', serif;
-  font-size:40px;
-  margin-bottom:10px;
-}
+  /* Main card */
+  .card{
+    background:rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    padding:58px 48px;
+    border-radius:30px;
+    box-shadow:0 22px 60px rgba(0,0,0,0.18);
+    width:min(580px, 92vw);
+    display:none;
+    animation:fadeIn 0.9s ease forwards;
+    position:relative;
+    overflow:hidden;
+  }
+  /* subtle inner glow */
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    background: radial-gradient(circle at top, rgba(230,57,70,0.10), transparent 60%),
+                radial-gradient(circle at bottom, rgba(181,23,158,0.08), transparent 55%);
+    pointer-events:none;
+  }
 
-.subtitle{
-  font-weight:300;
-  margin-bottom:30px;
-  color:#666;
-}
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(16px);}
+    to{opacity:1; transform:translateY(0);}
+  }
 
-h2{
-  font-family:'Playfair Display', serif;
-  font-size:26px;
-  margin-bottom:30px;
-}
+  h1{
+    position:relative;
+    font-family:'Playfair Display', serif;
+    font-size:44px;
+    margin:0 0 10px;
+    color:var(--text);
+    letter-spacing:0.2px;
+  }
 
-button{
-  padding:14px 32px;
-  border:none;
-  border-radius:50px;
-  font-size:18px;
-  margin:10px;
-  cursor:pointer;
-  transition:0.2s ease;
-}
+  h2{
+    position:relative;
+    font-family:'Playfair Display', serif;
+    font-size:28px;
+    margin:16px 0 28px;
+    color:var(--text);
+  }
 
-#yesBtn{
-  background:#e63946;
-  color:white;
-}
+  .btnRow{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:6px;
+  }
 
-#yesBtn:hover{
-  transform:scale(1.05);
-}
+  button{
+    padding:14px 34px;
+    border:none;
+    border-radius:999px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.18s ease;
+    box-shadow:0 12px 26px rgba(0,0,0,0.12);
+    user-select:none;
+    touch-action: manipulation;
+  }
 
-#noBtn{
-  background:#f1f1f1;
-  position:absolute;
-}
+  #yesBtn{
+    background:var(--accent);
+    color:#fff;
+  }
+  #yesBtn:hover{ transform:scale(1.04); }
 
-#message{
-  margin-top:25px;
-  font-family:'Playfair Display', serif;
-  font-size:20px;
-  color:#b5179e;
-}
+  #noBtn{
+    background:#f2f2f2;
+    color:#222;
+    position:absolute;
+    left: 50%;
+    top: 64%;
+    transform: translate(-50%, -50%);
+  }
 
-/* Start screen */
-#startScreen{
-  position:absolute;
-  height:100%;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#fbc2eb,#fcd6ce);
-  font-family:'Playfair Display', serif;
-  font-size:24px;
-  cursor:pointer;
-}
+  #message{
+    position:relative;
+    margin-top:26px;
+    font-family:'Playfair Display', serif;
+    font-size:22px;
+    line-height:1.35;
+    color:#b5179e;
+    min-height: 36px;
+  }
+
+  .tiny{
+    position:relative;
+    margin-top:14px;
+    font-size:12px;
+    color:#777;
+  }
+
+  /* Confetti canvas */
+  #confetti{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    display:none;
+  }
 </style>
 </head>
 
 <body>
 
-<div id="startScreen">Tap to open your surprise 💖</div>
+<canvas id="confetti"></canvas>
 
-<!-- Background Music -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/10/18/audio_2b32a9f5c5.mp3?filename=romantic-background-123123.mp3" type="audio/mpeg">
-</audio>
+<!-- Start Screen -->
+<div id="startScreen">
+  <div class="startCard">
+    <p class="startTitle">Tap to open your surprise 💖</p>
+    <p class="startHint">Turn your volume on for the full effect 🎶</p>
+    <span class="startBtn">Open</span>
+  </div>
+</div>
+
+<!-- Hidden YouTube Player (starts after tap) -->
+<iframe id="ytplayer"
+  width="0"
+  height="0"
+  src=""
+  frameborder="0"
+  allow="autoplay"
+></iframe>
 
 <div class="card" id="card">
   <h1>Anujee 💖</h1>
-  <div class="subtitle">From Kunal, with all my heart...</div>
   <h2>Will you be my Valentine?</h2>
 
-  <button id="yesBtn">Yes 💕</button>
+  <div class="btnRow">
+    <button id="yesBtn">Yes 💕</button>
+  </div>
+
   <button id="noBtn">No 🙈</button>
 
   <div id="message"></div>
+  <div class="tiny">Try pressing “No”… if you can 😌</div>
 </div>
 
 <script>
-const startScreen = document.getElementById("startScreen");
-const card = document.getElementById("card");
-const music = document.getElementById("bgMusic");
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("message");
+  const startScreen = document.getElementById("startScreen");
+  const card = document.getElementById("card");
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const message = document.getElementById("message");
+  const yt = document.getElementById("ytplayer");
 
-// Start experience
-startScreen.addEventListener("click",()=>{
-  startScreen.style.display="none";
-  card.style.display="block";
-  music.play();
-});
+  // Floating flowers (kept subtle)
+  const flowers = ["🌸","🌷","🌹","💐"];
+  for(let i=0;i<16;i++){
+    const f=document.createElement("div");
+    f.className="flower";
+    f.innerText=flowers[Math.floor(Math.random()*flowers.length)];
+    f.style.left=Math.random()*100+"%";
+    f.style.animationDelay=Math.random()*12+"s";
+    f.style.fontSize=(16+Math.random()*14)+"px";
+    document.body.appendChild(f);
+  }
 
-// Floating flowers
-const flowers=["🌸","🌷","🌹","💐"];
-for(let i=0;i<20;i++){
-  const f=document.createElement("div");
-  f.className="flower";
-  f.innerText=flowers[Math.floor(Math.random()*flowers.length)];
-  f.style.left=Math.random()*100+"%";
-  f.style.animationDelay=Math.random()*10+"s";
-  document.body.appendChild(f);
-}
+  // Start experience (tap triggers music + shows card)
+  startScreen.addEventListener("click", ()=>{
+    startScreen.style.display="none";
+    card.style.display="block";
 
-// Move No button
-function moveButton(){
-  const rect=card.getBoundingClientRect();
-  const btnRect=noBtn.getBoundingClientRect();
-  const maxX=rect.width-btnRect.width-20;
-  const maxY=rect.height-btnRect.height-20;
-  noBtn.style.left=Math.random()*maxX+"px";
-  noBtn.style.top=Math.random()*maxY+"px";
-}
+    // Arctic Monkeys - I Wanna Be Yours (YouTube). Ads may appear.
+    yt.src = "https://www.youtube.com/embed/nyuo9-OjNNg?autoplay=1&loop=1&playlist=nyuo9-OjNNg";
+    // place the No button once card is visible
+    setTimeout(moveNo, 80);
+  });
 
-noBtn.addEventListener("mouseenter",moveButton);
-noBtn.addEventListener("touchstart",(e)=>{
-  e.preventDefault();
-  moveButton();
-});
+  // Make "No" button dodge
+  function moveNo(){
+    const rect = card.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
 
-yesBtn.addEventListener("click",()=>{
-  message.innerHTML="I knew it 💖<br><br>Happy Valentine’s Day, Anujee.<br>Forever yours,<br>Kunal ❤️";
-  noBtn.style.display="none";
-  yesBtn.innerText="YES (Locked In 💕)";
-});
+    const pad = 18;
+    const maxX = rect.width - btnRect.width - pad;
+    const maxY = rect.height - btnRect.height - pad;
+
+    let x, y, tries = 0;
+    do {
+      x = pad + Math.random() * Math.max(1, maxX - pad);
+      y = pad + Math.random() * Math.max(1, maxY - pad);
+      tries++;
+    } while (tries < 25 && y < rect.height * 0.42); // keep it mostly lower
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "translate(0,0)";
+  }
+
+  ["mouseenter","mousedown","touchstart"].forEach(evt=>{
+    noBtn.addEventListener(evt, (e)=>{
+      e.preventDefault();
+      moveNo();
+    }, {passive:false});
+  });
+
+  window.addEventListener("resize", ()=>{
+    if(card.style.display==="block") moveNo();
+  });
+
+  // Confetti burst
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  let confettiPieces = [];
+  let confettiRunning = false;
+
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  function rand(min, max){ return Math.random()*(max-min)+min; }
+
+  function makeConfettiBurst(){
+    confettiPieces = [];
+    const count = 180;
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2.2;
+
+    for(let i=0;i<count;i++){
+      confettiPieces.push({
+        x: cx + rand(-30, 30),
+        y: cy + rand(-20, 20),
+        vx: rand(-6, 6),
+        vy: rand(-10, -3),
+        g: rand(0.12, 0.22),
+        size: rand(4, 9),
+        rot: rand(0, Math.PI*2),
+        vr: rand(-0.2, 0.2),
+        alpha: 1,
+        fade: rand(0.006, 0.012),
+        // random pleasant colors
+        color: ["#e63946","#ff7aa2","#b5179e","#ffd166","#06d6a0","#118ab2"][Math.floor(Math.random()*6)]
+      });
+    }
+    canvas.style.display = "block";
+    confettiRunning = true;
+    requestAnimationFrame(tickConfetti);
+    // auto-hide after a moment
+    setTimeout(()=>{ confettiRunning=false; }, 2200);
+  }
+
+  function tickConfetti(){
+    if(!confettiRunning && confettiPieces.length === 0){
+      canvas.style.display="none";
+      return;
+    }
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    for(let i=confettiPieces.length-1;i>=0;i--){
+      const p = confettiPieces[i];
+      p.vy += p.g;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.alpha -= p.fade;
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.75);
+      ctx.restore();
+
+      if(p.alpha <= 0 || p.y > canvas.height + 40) confettiPieces.splice(i,1);
+    }
+
+    if(confettiRunning || confettiPieces.length > 0){
+      requestAnimationFrame(tickConfetti);
+    } else {
+      canvas.style.display="none";
+    }
+  }
+
+  // Yes click
+  yesBtn.addEventListener("click", ()=>{
+    makeConfettiBurst();
+
+    message.innerHTML = "I knew it 💖<br><br>Happy Valentine’s Day, Anujee ❤️";
+    noBtn.style.display="none";
+    yesBtn.disabled = true;
+    yesBtn.style.opacity = "0.95";
+    yesBtn.innerText = "YES 💕";
+  });
 </script>
 
 </body>
