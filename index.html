@@ -238,8 +238,7 @@
   <button id="noBtn">No 🙈</button>
 
   <div id="message"></div>
-  <div class="tiny">Try pressing “No”… if you can 😌</div>
-</div>
+  <div class="tiny" id="noHint">Try pressing “No”… if you can 😌</div>
 
 <script>
   const startScreen = document.getElementById("startScreen");
@@ -384,14 +383,17 @@
 
   // Yes click
   yesBtn.addEventListener("click", ()=>{
-    makeConfettiBurst();
+  makeConfettiBurst();
 
-    message.innerHTML = "I knew it 💖<br><br>Happy Valentine’s Day, Anujee ❤️";
-    noBtn.style.display="none";
-    yesBtn.disabled = true;
-    yesBtn.style.opacity = "0.95";
-    yesBtn.innerText = "YES 💕";
-  });
+  message.innerHTML = "I knew it 💖<br><br>Happy Valentine’s Day, Anujee ❤️";
+
+  noBtn.style.display = "none";
+  document.getElementById("noHint").style.display = "none"; // hide the hint
+
+  yesBtn.disabled = true;
+  yesBtn.style.opacity = "0.95";
+  yesBtn.innerText = "YES 💕";
+});
 </script>
 
 </body>
